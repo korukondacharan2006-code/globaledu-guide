@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="GlobalEdu Guide - One-stop platform for studying abroad. Free expert consultation, universities, scholarships, visa & accommodation guidance." />
+<title>GlobalEdu Guide – Study Abroad Made Simple</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============ ONBOARDING WIZARD ============ -->
+<div id="onboarding" class="onboarding">
+
+  <!-- Progress -->
+  <div class="ob-top">
+    <a href="#" class="logo light" id="obLogo"><span class="logo-mark">🎓</span> GlobalEdu<span class="logo-accent">Guide</span></a>
+    <div class="ob-steps">
+      <span class="ob-step active" data-step="1">1 · Welcome</span>
+      <span class="ob-step" data-step="2">2 · Profile</span>
+      <span class="ob-step" data-step="3">3 · Slot</span>
+      <span class="ob-step" data-step="4">4 · WhatsApp</span>
+    </div>
+    <button class="link-btn" id="skipOb">Skip →</button>
+  </div>
+
+  <!-- STEP 1: WELCOME -->
+  <section class="ob-screen active" data-screen="1">
+    <div class="ob-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="ob-welcome">
+      <span class="badge anim-pop">🌍 Trusted by 25,000+ aspirants</span>
+      <h1 class="anim-up">Study Abroad <span class="grad-text">Made Simple</span></h1>
+      <p class="lead anim-up delay-1">Book a Free Expert Guidance Session and explore your global education journey — universities, exams, scholarships, visa & more.</p>
+      <div class="hero-cta anim-up delay-2">
+        <button class="btn btn-primary" data-go="2">Book Free Consultation →</button>
+        <button class="btn btn-ghost" id="exploreSkip">Explore Countries</button>
+      </div>
+      <div class="hero-stats anim-up delay-3">
+        <div><strong>50+</strong><span>Universities</span></div>
+        <div><strong>6</strong><span>Countries</span></div>
+        <div><strong>200+</strong><span>Scholarships</span></div>
+        <div><strong>10</strong><span>Step Roadmap</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2: CONSULTATION FORM -->
+  <section class="ob-screen" data-screen="2">
+    <div class="ob-panel">
+      <span class="kicker">Step 2</span>
+      <h2>Tell us about you</h2>
+      <p>Takes 60 seconds. We tailor your consultation around your profile.</p>
+      <form id="consultForm" class="form-grid" novalidate>
+        <div class="field"><label>Full Name *</label><input name="name" required/></div>
+        <div class="field"><label>Email *</label><input type="email" name="email" required/></div>
+        <div class="field"><label>Phone Number *</label><input name="phone" required placeholder="+1 555 123 4567"/></div>
+        <div class="field"><label>Current Degree *</label>
+          <select name="degree" required><option value="">Select</option><option>Bachelor's</option><option>Master's</option><option>Diploma</option></select>
+        </div>
+        <div class="field"><label>Branch</label><input name="branch" placeholder="Computer Science"/></div>
+        <div class="field"><label>CGPA (out of 10) *</label><input type="number" step="0.01" min="0" max="10" name="cgpa" required/></div>
+        <div class="field"><label>Budget (USD / year) *</label><input type="number" name="budget" required/></div>
+        <div class="field"><label>Preferred Country *</label>
+          <select name="country" required><option value="">Select</option><option>USA</option><option>Canada</option><option>UK</option><option>Australia</option><option>Germany</option><option>New Zealand</option><option>Any</option></select>
+        </div>
+        <div class="field"><label>Preferred Intake *</label>
+          <select name="intake" required><option value="">Select</option><option>Fall 2026</option><option>Spring 2026</option><option>Summer 2026</option><option>Fall 2027</option></select>
+        </div>
+        <div class="field"><label>Current City</label><input name="city"/></div>
+        <div class="field"><label>Preferred Language</label>
+          <select name="lang"><option>English</option><option>Hindi</option><option>Spanish</option><option>French</option><option>German</option></select>
+        </div>
+        <div class="field form-actions">
+          <button type="button" class="btn btn-ghost" data-go="1">← Back</button>
+          <button type="submit" class="btn btn-primary">Continue →</button>
+          <span id="consultMsg" class="form-msg"></span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- STEP 3: SLOT BOOKING -->
+  <section class="ob-screen" data-screen="3">
+    <div class="ob-panel">
+      <span class="kicker">Step 3</span>
+      <h2>Pick a slot that works for you</h2>
+      <p>Choose a date, a time, and we'll convert it across global time zones automatically.</p>
+
+      <div class="slot-grid">
+        <div>
+          <label class="slot-label">Select Date</label>
+          <div class="cal" id="calendar"></div>
+        </div>
+        <div>
+          <label class="slot-label">Available Time Slots</label>
+          <div class="slot-list" id="slotList"></div>
+
+          <label class="slot-label" style="margin-top:18px">Convert To</label>
+          <select id="tzSelect" class="tz-select">
+            <option value="Asia/Kolkata">🇮🇳 India (IST)</option>
+            <option value="America/New_York">🇺🇸 USA East (EST)</option>
+            <option value="America/Los_Angeles">🇺🇸 USA West (PST)</option>
+            <option value="America/Toronto">🇨🇦 Canada (EST)</option>
+            <option value="Europe/London">🇬🇧 UK (GMT)</option>
+            <option value="Australia/Sydney">🇦🇺 Australia (AEST)</option>
+            <option value="Europe/Berlin">🇩🇪 Germany (CET)</option>
+          </select>
+
+          <label class="slot-label" style="margin-top:18px">Preferred Language</label>
+          <select id="slotLang" class="tz-select">
+            <option>English</option><option>Hindi</option><option>Spanish</option><option>French</option><option>German</option>
+          </select>
+
+          <div class="slot-summary" id="slotSummary">Pick a date and time to see your slot.</div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-go="2">← Back</button>
+        <button type="button" class="btn btn-primary" id="confirmSlot">Confirm Slot →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4: WHATSAPP -->
+  <section class="ob-screen" data-screen="4">
+    <div class="ob-panel ob-success">
+      <div class="check-burst">✓</div>
+      <h2>Your Free Consultation Has Been Reserved</h2>
+      <p id="confirmDetails" class="lead"></p>
+
+      <div class="wa-card">
+        <div class="wa-icon">💬</div>
+        <div>
+          <h3>Connect With Our Expert</h3>
+          <p>Consultation details will be shared through WhatsApp.</p>
+        </div>
+        <a id="waBtn" target="_blank" rel="noopener" class="btn btn-wa">Open WhatsApp →</a>
+      </div>
+
+      <button class="btn btn-primary big" id="enterSite">Enter the Platform →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ============ MAIN APP (hidden until onboarding done or skipped) ============ -->
+<div id="app" class="app hidden">
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark">🎓</span>
+      <span>GlobalEdu<span class="logo-accent">Guide</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#countries">Countries</a>
+      <a href="#scholarships">Scholarships</a>
+      <a href="#accommodation">Stay</a>
+      <a href="#roadmap">Visa Roadmap</a>
+      <a href="#recommend">Recommend</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text reveal">
+      <span class="badge">🚀 Your roadmap starts here</span>
+      <h1>Your Complete <span class="grad-text">Roadmap To Study Abroad</span></h1>
+      <p class="lead">Universities, scholarships, accommodation, exams, visa guidance and career planning — all in one place.</p>
+      <div class="hero-cta">
+        <a href="#recommend" class="btn btn-primary">Start Journey →</a>
+        <a href="#countries" class="btn btn-ghost">Explore Countries</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>50+</strong><span>Universities</span></div>
+        <div><strong>6</strong><span>Countries</span></div>
+        <div><strong>200+</strong><span>Scholarships</span></div>
+        <div><strong>10</strong><span>Step Roadmap</span></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="hero-card float">
+        <div class="hc-row"><span>🇺🇸</span><div><b>USA</b><small>MS in Data Science</small></div><span class="tag">Top Pick</span></div>
+        <div class="hc-row"><span>🇩🇪</span><div><b>Germany</b><small>Low Tuition</small></div><span class="tag green">Affordable</span></div>
+        <div class="hc-row"><span>🇨🇦</span><div><b>Canada</b><small>PR Friendly</small></div><span class="tag blue">PR Path</span></div>
+        <div class="hc-bar"><div class="hc-prog"></div></div>
+        <small class="hc-foot">Your match score: 92%</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES / WHY US -->
+<section id="features" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Why GlobalEdu</span>
+      <h2>Everything you need, in one place</h2>
+      <p>Built to remove every friction students face while planning their journey abroad.</p>
+    </div>
+    <div class="grid-3">
+      <div class="feature-card reveal"><div class="f-ico">🎯</div><h3>Personalised Match</h3><p>Smart recommendation engine maps your CGPA, budget and test scores to the best-fit universities.</p></div>
+      <div class="feature-card reveal"><div class="f-ico">💰</div><h3>Scholarship Finder</h3><p>200+ scholarships filtered by country, course and eligibility — no more endless Googling.</p></div>
+      <div class="feature-card reveal"><div class="f-ico">📅</div><h3>Step-by-Step Roadmap</h3><p>A clear 8-step visa & application timeline so you never miss a deadline.</p></div>
+      <div class="feature-card reveal"><div class="f-ico">🏠</div><h3>Accommodation Guide</h3><p>Compare on-campus, PG and shared housing options with real cost estimates.</p></div>
+      <div class="feature-card reveal"><div class="f-ico">🛡️</div><h3>Scam Awareness</h3><p>Spot fake consultancies with our verified red-flag checklist.</p></div>
+      <div class="feature-card reveal"><div class="f-ico">💬</div><h3>Mentor on WhatsApp</h3><p>Talk to real mentors anytime — booking, doubts and document review.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS COUNTER -->
+<section class="section stats-band">
+  <div class="container stats-grid">
+    <div class="stat reveal"><strong data-count="25000">0</strong><span>Students Guided</span></div>
+    <div class="stat reveal"><strong data-count="50">0</strong><span>Partner Universities</span></div>
+    <div class="stat reveal"><strong data-count="200">0</strong><span>Scholarships Listed</span></div>
+    <div class="stat reveal"><strong data-count="98">0</strong><span>% Visa Success</span></div>
+  </div>
+</section>
+
+<!-- COUNTRIES -->
+<section id="countries" class="section alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Explore</span>
+      <h2>Country Explorer</h2>
+      <p>Pick a destination to view exams, universities, costs, visa & more.</p>
+    </div>
+    <div class="country-filter" id="countryFilter">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="affordable">Affordable</button>
+      <button class="chip" data-filter="pr">PR-Friendly</button>
+      <button class="chip" data-filter="top">Top Ranked</button>
+    </div>
+    <div class="country-grid" id="countryGrid"></div>
+    <div id="countryDetails" class="country-details hidden"></div>
+  </div>
+</section>
+
+<!-- SCHOLARSHIPS -->
+<section id="scholarships" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Funding</span>
+      <h2>Scholarship Hub</h2>
+    </div>
+    <div class="grid-3" id="scholarshipGrid"></div>
+  </div>
+</section>
+
+<!-- ACCOMMODATION -->
+<section id="accommodation" class="section alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Where you live</span>
+      <h2>Accommodation Guide</h2>
+    </div>
+    <div class="grid-4" id="accomGrid"></div>
+  </div>
+</section>
+
+<!-- VISA ROADMAP -->
+<section id="roadmap" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Plan</span>
+      <h2>Visa Roadmap — 8 Simple Steps</h2>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- CONSULTANCY AWARENESS -->
+<section id="awareness" class="section alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">⚠️ Stay Safe</span>
+      <h2>Consultancy Awareness</h2>
+      <p>Don't fall for scams. Watch out for these red flags.</p>
+    </div>
+    <div class="grid-4" id="warnGrid"></div>
+    <div class="card tips reveal">
+      <h3>✅ How to Pick a Genuine Consultant</h3>
+      <ul>
+        <li>Verify registration and physical office address</li>
+        <li>Ask for past student references and outcomes</li>
+        <li>Check transparent fee structure in writing</li>
+        <li>Confirm direct university partnerships</li>
+        <li>Never pay a "visa guarantee" — no one can guarantee a visa</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RECOMMENDATION -->
+<section id="recommend" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">AI Match</span>
+      <h2>Smart Recommendation System</h2>
+      <p>Enter your stats and we'll suggest the best fits for you.</p>
+    </div>
+    <form id="recForm" class="card form-grid reveal">
+      <div class="field"><label>CGPA (out of 10)</label><input type="number" id="recCgpa" step="0.01" min="0" max="10" required placeholder="8.0"/></div>
+      <div class="field"><label>Budget (USD/year)</label><input type="number" id="recBudget" required placeholder="25000"/></div>
+      <div class="field"><label>IELTS Score</label><input type="number" id="recIelts" step="0.5" min="0" max="9" required placeholder="6.5"/></div>
+      <div class="field"><label>Preferred Course</label>
+        <select id="recCourse"><option>Computer Science</option><option>Data Science</option><option>Artificial Intelligence</option><option>Business Analytics</option><option>Cyber Security</option><option>Mechanical Engineering</option></select>
+      </div>
+      <div class="field"><label>Preferred Country</label>
+        <select id="recCountry"><option>Any</option><option>USA</option><option>Canada</option><option>UK</option><option>Australia</option><option>Germany</option><option>New Zealand</option></select>
+      </div>
+      <div class="field form-actions">
+        <button class="btn btn-primary" type="submit">Get Recommendations</button>
+      </div>
+    </form>
+    <div id="recResult" class="rec-result hidden"></div>
+  </div>
+</section>
+
+<!-- EXAM PREP -->
+<section id="exams" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Tests</span>
+      <h2>Exam Prep — At a Glance</h2>
+      <p>Know which exam you need, the target score, and how long to prepare.</p>
+    </div>
+    <div class="exam-grid">
+      <div class="exam-card reveal"><div class="exam-top"><span class="exam-ico">📘</span><h3>IELTS</h3></div><p>English proficiency for UK, AUS, CA, NZ.</p><ul><li><b>Target:</b> 6.5 – 7.5</li><li><b>Fee:</b> ~$245</li><li><b>Prep:</b> 2–3 months</li></ul></div>
+      <div class="exam-card reveal"><div class="exam-top"><span class="exam-ico">📗</span><h3>TOEFL</h3></div><p>English proficiency widely accepted in USA.</p><ul><li><b>Target:</b> 90 – 110</li><li><b>Fee:</b> ~$220</li><li><b>Prep:</b> 2–3 months</li></ul></div>
+      <div class="exam-card reveal"><div class="exam-top"><span class="exam-ico">📕</span><h3>GRE</h3></div><p>For MS programs in USA & many other countries.</p><ul><li><b>Target:</b> 310 – 325+</li><li><b>Fee:</b> ~$220</li><li><b>Prep:</b> 3–4 months</li></ul></div>
+      <div class="exam-card reveal"><div class="exam-top"><span class="exam-ico">📒</span><h3>GMAT</h3></div><p>For MBA & business analytics programs.</p><ul><li><b>Target:</b> 650 – 720+</li><li><b>Fee:</b> ~$275</li><li><b>Prep:</b> 3–5 months</li></ul></div>
+      <div class="exam-card reveal"><div class="exam-top"><span class="exam-ico">📓</span><h3>PTE</h3></div><p>Fast results, accepted in UK, AUS, CA, NZ.</p><ul><li><b>Target:</b> 65 – 79</li><li><b>Fee:</b> ~$210</li><li><b>Prep:</b> 1–2 months</li></ul></div>
+      <div class="exam-card reveal"><div class="exam-top"><span class="exam-ico">📔</span><h3>Duolingo</h3></div><p>Affordable, fully online English test.</p><ul><li><b>Target:</b> 110 – 130</li><li><b>Fee:</b> ~$59</li><li><b>Prep:</b> 2–4 weeks</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">How it works</span>
+      <h2>Your Journey in 4 Simple Steps</h2>
+    </div>
+    <div class="process-grid">
+      <div class="proc reveal"><div class="proc-num">1</div><h3>Tell us about you</h3><p>Share your CGPA, budget and goals in 60 seconds.</p></div>
+      <div class="proc reveal"><div class="proc-num">2</div><h3>Get matched</h3><p>Our engine recommends countries, universities & scholarships.</p></div>
+      <div class="proc reveal"><div class="proc-num">3</div><h3>Talk to a mentor</h3><p>Book a free WhatsApp consultation in your time zone.</p></div>
+      <div class="proc reveal"><div class="proc-num">4</div><h3>Apply with confidence</h3><p>Follow the visa roadmap and track every deadline.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Stories</span>
+      <h2>Loved by students worldwide</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi reveal"><div class="stars">★★★★★</div><p>"GlobalEdu Guide turned my confusion into a clear plan. I got into my dream MS in Canada with a 50% scholarship."</p><div class="t-user"><div class="t-avatar">A</div><div><b>Ananya R.</b><small>MS, University of Toronto 🇨🇦</small></div></div></div>
+      <div class="testi reveal"><div class="stars">★★★★★</div><p>"The visa roadmap saved me weeks. Every deadline, every document — already mapped out."</p><div class="t-user"><div class="t-avatar">R</div><div><b>Rahul M.</b><small>MS, TU Munich 🇩🇪</small></div></div></div>
+      <div class="testi reveal"><div class="stars">★★★★★</div><p>"My mentor on WhatsApp was a game changer. Honest advice, no pushy sales calls."</p><div class="t-user"><div class="t-avatar">S</div><div><b>Sara K.</b><small>MS, University of Melbourne 🇦🇺</small></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="container cta-inner reveal">
+    <div>
+      <h2>Ready to start your global journey?</h2>
+      <p>Book a free 30-min mentor session — no spam, no obligation.</p>
+    </div>
+    <a href="#contact" class="btn btn-primary big">Book Free Consultation →</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Help</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <span class="kicker">Get in touch</span>
+      <h2>Talk to a Mentor</h2>
+      <p>Have a question we didn't cover? Send us a message — we reply within 24 hours.</p>
+      <ul class="contact-info">
+        <li>📧 hello@globaleduguide.com</li>
+        <li>📞 +1 (555) 123-4567</li>
+        <li>📍 Global • Remote-first</li>
+      </ul>
+    </div>
+    <form id="contactForm" class="card form-grid reveal" novalidate>
+      <div class="field"><label>Name *</label><input name="cname" required/></div>
+      <div class="field"><label>Email *</label><input type="email" name="cemail" required/></div>
+      <div class="field"><label>Subject *</label><input name="csubject" required/></div>
+      <div class="field"><label>Message *</label><textarea name="cmessage" rows="4" required></textarea></div>
+      <div class="field form-actions">
+        <button class="btn btn-primary" type="submit">Send Message</button>
+        <span id="contactMsg" class="form-msg"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="#home" class="logo light"><span class="logo-mark">🎓</span> GlobalEdu<span class="logo-accent">Guide</span></a>
+      <p>Your one-stop platform for studying abroad with confidence.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#countries">Countries</a>
+      <a href="#scholarships">Scholarships</a>
+      <a href="#roadmap">Visa Roadmap</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <a href="#accommodation">Accommodation</a>
+      <a href="#recommend">Recommendations</a>
+      <a href="#awareness">Consultancy Safety</a>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <div class="socials">
+        <a href="#" aria-label="Twitter">🐦</a>
+        <a href="#" aria-label="Instagram">📸</a>
+        <a href="#" aria-label="LinkedIn">💼</a>
+        <a href="#" aria-label="YouTube">▶️</a>
+      </div>
+      <p>hello@globaleduguide.com</p>
+    </div>
+  </div>
+  <div class="footer-base"><div class="container">© <span id="year"></span> GlobalEdu Guide. All rights reserved.</div></div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a id="floatWa" class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
